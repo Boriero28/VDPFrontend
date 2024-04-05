@@ -1,0 +1,74 @@
+
+<div class="container mt-4">
+    <form [formGroup]="registrationForm" (ngSubmit)="emitRegistration();send()">
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="firstName">Nome: <span class="text-danger">{{ nomeTitolareError }}</span> </label>
+            <input type="text" id="firstName" class="form-control custom-input" formControlName="firstName">
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="lastName">Cognome: <span class="text-danger">{{ cognomeTitolareError }} </span></label>
+            <input type="text" id="lastName" class="form-control custom-input" formControlName="lastName" >
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="company">Azienda: <span class="text-danger">{{ aziendaError }}</span></label>
+        <input type="text" id="company" class="form-control custom-input" formControlName="company">
+      </div>
+  
+      <div class="form-group">
+        <label for="email">Email: <span class="text-danger">{{ emailError }}</span></label>
+        <input type="email" id="email" class="form-control custom-input" formControlName="email">
+      </div>
+  
+      <div class="form-group">
+        <label for="reason">Motivo Visita: <span class="text-danger">{{ motivoError }}</span></label>
+        <input type="text" id="reason" class="form-control custom-input" formControlName="reason">
+      </div>
+
+      <div class="form-group">
+        <label>Persona/e di Riferimento: <span class="text-danger">{{ personaRiferimentoError }}</span></label>
+        <mat-select id="referencePersons" class="form-control custom-input" formControlName="referencePersons" multiple>
+          <mat-option id="option" *ngFor="let employee of employees" [value]="employee.email">{{ employee.name }} {{ employee.surname }}</mat-option>
+        </mat-select>
+      </div>
+
+      <div class="form-group">
+        <label for="notes">Note:</label>
+        <textarea id="notes" class="form-control custom-input" formControlName="notes"></textarea>
+      </div>
+
+      <br>
+
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="privacyCheckbox" formControlName="privacy">
+        <label class="form-check-label" for="privacyCheckbox">Accetto la privacy</label>
+        <span class="text-danger">{{ privacyError }}</span>
+      </div>
+
+      <br>
+
+      <div class="text-center">
+        <button type="submit" [disabled]="!registrationForm.valid" class="btn custom-btn">Registra</button>
+      </div>
+
+      <a [routerLink]="['departure']">Vuoi uscire?</a>
+
+      <div class="pt-3" *ngIf="registrationErrors !== null">
+        <small class="text-danger">{{ registrationErrors.error }}</small>
+      </div>
+
+    </form>
+  </div>
+   
+
+
+
+

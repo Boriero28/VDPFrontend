@@ -1,0 +1,103 @@
+<div class=" d-flex justify-content-between align-items-center">
+  <h1 class="text-center">Lista appuntamenti</h1>
+  <div>
+    <button class="btn btn-sm btn-primary mx-1" (click)="openFilterModal()">Filtra</button>
+    <button type="button" class="btn btn-sm btn-secondary mx-1" (click)="clearFilters()">Pulisci filtri</button>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th>Nome</th>
+        <th>Cognome</th>
+        <th>Azienda</th>
+        <th>Email</th>
+        <th>Motivo Visita</th>
+        <th>Data</th>
+        <th>Ora arrivo</th>
+        <th>Ora Uscita</th>
+        <th>Referente/i</th>
+        <th>Note</th>
+        <th>Modifica</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let customer of customers">
+        <td>{{ customer.firstName }}</td>
+        <td>{{ customer.lastName }}</td>
+        <td>{{ customer.company }}</td>
+        <td>{{ customer.email }}</td>
+        <td>{{ customer.reason }}</td>
+        <td>{{ customer.date | date:'dd/MM/yyyy' }}</td>
+        <td>{{ customer.arrivalTime }}</td>
+        <td>{{ customer.departureTime }}</td>
+        <td class="text-center">
+          <button mat-button [matMenuTriggerFor]="referenceMenu">Vedi referenti</button>
+          <mat-menu #referenceMenu="matMenu">
+            <ng-container *ngFor="let reference of customer.referencePersons">
+              <button mat-menu-item>{{ reference }}</button>
+            </ng-container>
+          </mat-menu>
+        </td>
+        <td [title]="customer.notes" style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+          {{ customer.notes ? (customer.notes | slice:0:50) + (customer.notes.length > 50 ? '...' : '') : '' }}
+        </td>
+
+        <td style="text-align: center; width: 1%; cursor: pointer;" (click)="openEditModal(customer)">
+          <img width="30" height="30" src="https://img.icons8.com/avantgarde/100/edit.png" alt="edit" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modale per il filtro dei clienti -->
+<ng-template #filterModal let-c="close" let-d="dismiss">
+ 
+      <div class="modal-header">
+        <h4 class="modal-title">Filtra Clienti</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="firstName">Nome</label>
+          <input type="text" class="form-control" id="firstName" [(ngModel)]="filters.firstName" >
+        </div>
+        <div class="form-group">
+          <label for="lastName">Cognome</label>
+          <input type="text" class="form-control" id="lastName" [(ngModel)]="filters.lastName">
+        </div>
+        <div class="form-group">
+          <label for="company">Azienda</label>
+          <input type="text" class="form-control" id="company" [(ngModel)]="filters.company">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" [(ngModel)]="filters.email">
+        </div>
+        <div class="form-group">
+          <label for="date">Data</label>
+          <input type="date" class="form-control" id="date" [(ngModel)]="filters.date">
+        </div>
+        <div class="form-group">
+          <label for="referencePersons">Referente</label>
+          <select class="form-control" id="referencePersons" [(ngModel)]="filters.referencePersons">
+            <option value=""></option>
+            <option *ngFor="let employee of employees" [value]="employee.email">{{ employee.name }} {{ employee.surname }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        
+        <button type="button" class="btn btn-primary" (click)="applyFilters(filters)">Applica filtri</button>
+      </div>
+    
+</ng-template>
+
+
+
+

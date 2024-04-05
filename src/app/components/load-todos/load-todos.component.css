@@ -1,0 +1,30 @@
+.title {
+  color: white;
+  text-align: center;
+  background-color: #212529;
+}
+
+.table th,
+.table td {
+  vertical-align: middle;
+}
+
+.table th {
+  background-color: #343a40;
+  color: white;
+}
+
+.dropdown-menu {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.btn-secondary {
+  background-color: grey;  
+  color: white;  
+}
+
+.btn-secondary:hover {
+  background-color: orange;  
+}
+

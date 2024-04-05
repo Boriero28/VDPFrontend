@@ -1,0 +1,16 @@
+<div class="container mt-4">
+    <form [formGroup]="updateDepartureForm" (ngSubmit)="updateDepartureTime();">
+  
+      <div class="form-group">
+        <label for="email">Email: <span class="text-danger">{{ emailError }}</span></label>
+        <input type="email" id="email" class="form-control custom-input" formControlName="email">
+      </div>
+
+      <br>
+
+      <div class="text-center">
+        <button type="submit" [disabled]="!updateDepartureForm.valid" class="btn custom-btn">Esci</button>
+      </div>
+
+    </form>
+  </div>

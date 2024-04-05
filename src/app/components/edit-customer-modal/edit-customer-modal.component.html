@@ -1,0 +1,53 @@
+<div class="modal-header">
+    <h4 class="modal-title">Modifica Cliente</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="firstName">Nome</label>
+      <input type="text" class="form-control" id="firstName" [(ngModel)]="customer.firstName">
+    </div>
+    <div class="form-group">
+      <label for="lastName">Congnome</label>
+      <input type="text" class="form-control" id="lastName" [(ngModel)]="customer.lastName">
+    </div>
+    <div class="form-group">
+      <label for="company">Azienda</label>
+      <input type="text" class="form-control" id="company" [(ngModel)]="customer.company">
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" class="form-control" [(ngModel)]="customer.email">
+    </div>
+    <div class="form-group">
+      <label for="date">Data</label>
+      <input type="date" class="form-control" id="date" [(ngModel)]="customer.date">
+    </div>
+    <div class="form-group">
+      <label for="arrivalTime">Ora arrivo</label>
+      <input type="time" class="form-control" id="arrivalTime" [(ngModel)]="customer.arrivalTime">
+    </div>
+    <div class="form-group">
+      <label for="departureTime">Ora uscita</label>
+      <input type="time" class="form-control" id="departureTime" [(ngModel)]="customer.departureTime">
+    </div>
+    <div class="form-group">
+      <label for="note">Note</label>
+      <input type="text" class="form-control" id="note" [(ngModel)]="customer.notes">
+    </div>
+    <!-- <div class="form-group">
+      <label for="referencePersons">Referente</label>
+      <select class="form-control" id="referencePersons" [(ngModel)]="customer.referencePersons">
+        <option value=""></option>
+        <option *ngFor="let employee of employees" [value]="employee.email">{{ employee.name }} {{ employee.surname }}</option>
+      </select>
+    </div> -->
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss()">Annulla</button>
+    <button type="button" class="btn btn-primary" (click)="updateCustomer()">Salva</button>
+    <button style="background-color: red;" type="button" class="btn btn-primary" (click)="deleteCustomer()">Elimina</button>
+  </div>
+  
